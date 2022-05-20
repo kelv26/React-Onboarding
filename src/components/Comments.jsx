@@ -1,7 +1,7 @@
 import Comment from "./Comment"
 
 const Comments = ({comments}) => {
-  
+  const lastComment = comments[comments.length-1];
   return (
       <>
         <div class="grid grid-flow-row auto-rows-max mx-10 my-10 w-fit ">
@@ -9,6 +9,7 @@ const Comments = ({comments}) => {
             <Comment 
                 key={comment.id} 
                 comment={comment}
+                lastcommentid={lastComment.id}
             />
             ))}
 

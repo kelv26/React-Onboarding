@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react'
 import { useParams } from "react-router-dom"
 import { useNavigate } from "react-router-dom";
 import Comments from "../components/Comments";
-import LoadingSpinner from "../components/LoadingSpinner.jsx"
+import LoadingSpinner from "../components/LoadingSpinner"
+import Button from "../components/Button"
+import AddComment from "../components/AddComment"
 
 const InnerPage = () => {
     const params = useParams();
@@ -13,6 +15,9 @@ const InnerPage = () => {
     const [comments, setPostComments] = useState([])
     const [isLoading, setIsLoading] = useState(false);
     const [imageSource, setImageSource] = useState("");
+
+    //Hide Add Comments on Load
+    const [showAddComment, setShowAddComment] = useState(false)
 
     //Hook Fetched Comments into Object
     useEffect(() => {
@@ -54,6 +59,20 @@ const InnerPage = () => {
         return data;
     }
 
+    //Add Comment Function 
+    //#Disclaimer: Will Reset after page reloads.
+    const addComment = (comment) => {
+        //Get the current post Id
+        const postId = comments[0].postId
+        //Get the last comment's ID and Add 1 for new comment
+        const lastcomment = comments[comments.length-1]
+        const id = lastcomment.id+1
+        //Combine Ids with comment contents
+        const newComment = {postId, id, ...comment}
+        //Update the array of comments
+        setPostComments([...comments, newComment])
+    }
+
     //Store Contents of the page
     const Contents= () => {
         return (
@@ -64,10 +83,16 @@ const InnerPage = () => {
             <p className="my-5 justify-evenly pb-5" >{post.body}</p>
             <div class="border-t border-black w-full pb-4"></div>
         
-            <div className="Comments">
+            <div className="Comments md:flex md:justify-between">
                 <h1 className="font-extrabold text-Purple text-3xl">Comments ({comments.length})</h1>
-                <input type="email" placeholder='Email' className="border-2 border-Purple rounded-md mt-2 py-2 px-2 pr-10 w-6/12" />
+                <Button 
+                    color={showAddComment ? 'red' : 'green'} 
+                    text={showAddComment ? 'Close' : 'Add'} 
+                    onClick={() => setShowAddComment(!showAddComment)} 
+                />
             </div>
+            {/* If showAddComment is true then show addCommentForm */}
+            {showAddComment && <AddComment onAdd={addComment}/>}
             <Comments comments={comments} />
         </div>
         )

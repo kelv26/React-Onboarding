@@ -27,7 +27,7 @@ const [posts, setPosts] = useState([])
 
   const Header = () => {
     return (
-      <div className="mx-56">
+      <div className="mx-auto">
         <h1 className="w-full text-center text-Purple font-extrabold text-4xl">
           Latest News
         </h1>
@@ -40,7 +40,7 @@ const [posts, setPosts] = useState([])
 
   return (
     <Router>
-      <div className="container bg-Bg py-14 w-screen">
+      <div className="bg-Bg py-14 w-screen">
         <div className="max-w-screen-lg mx-auto">
         <Routes>
           <Route path='/posts/:id' 
