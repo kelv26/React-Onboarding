@@ -28,10 +28,6 @@ const InnerPage = () => {
             console.log("Comments Fetched")
         }
         getPostComments()
-    }, [])
-
-    //Hook Fetched Post into Web
-    useEffect(() => {
         const getPost = async () => {
             const commentsFromServer = await FetchPost()
             setPost(commentsFromServer)
@@ -81,7 +77,7 @@ const InnerPage = () => {
             <h1 className="font-bold text-3xl justify-start text-Purple">{post.title}</h1>
             <img className="mx-auto my-10 w-4/5" src={`../src/assets/${imageSource}`} alt="" />
             <p className="my-5 justify-evenly pb-5" >{post.body}</p>
-            <div class="border-t border-black w-full pb-4"></div>
+            <div className="border-t border-black w-full pb-4"></div>
         
             <div className="Comments md:flex md:justify-between">
                 <h1 className="font-extrabold text-Purple text-3xl">Comments ({comments.length})</h1>

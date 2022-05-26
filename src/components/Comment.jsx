@@ -8,7 +8,7 @@ const Comment = ({comment, lastcommentid}) => {
         {/* Remove last comment's horizontal line #DesignPurpose */}
         {comment.id==lastcommentid
         ? '' 
-        :<div class="border-t border-gray-400 w-full "></div>
+        :<div className="border-t border-gray-400 w-full "></div>
         }
         
     </div>
